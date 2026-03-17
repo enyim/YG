@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <IsPackable>true</IsPackable>
+    <Authors>Attila Kiskó</Authors>
+    <!--<Version>1.0.0</Version>-->
+    <ProjectUrl>https://github.com/enyim/YG</ProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Description>.NET bindings for Facebook's Yoga layout engine.</Description>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="runtimes/**">
+      <Pack>true</Pack>
+      <PackagePath>runtimes/</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

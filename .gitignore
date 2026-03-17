@@ -1,0 +1,17 @@
+*.7z
+generated/
+
+*.suo
+*.user
+
+artifacts/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+
+.vs/
+**/.DS_Store
+global.json
+.env
+
+native/build/

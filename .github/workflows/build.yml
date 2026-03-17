@@ -1,0 +1,69 @@
+name: Build
+
+#[push]
+on: 
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Package version
+        required: true
+        default: 0.0.1
+
+permissions:
+  packages: write
+  contents: read
+
+jobs:
+  native:
+    strategy:
+      matrix:
+        include:
+          - os: windows-latest
+            arch: x64
+          - os: macos-latest
+            arch: arm64
+          - os: ubuntu-latest
+            arch: x64
+    
+    runs-on: ${{ matrix.os }}
+    
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: recursive
+
+      - name: Build
+        run: pwsh native/build.ps1 -Arch ${{ matrix.arch }}
+
+      - name: Upload runtimes
+        uses: actions/upload-artifact@v6
+        with:
+          name: runtimes-${{ matrix.os }}-${{ matrix.arch }}
+          path: src/YG/runtimes/
+
+  pack:
+    needs: native        # waits for all 3 matrix jobs
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Download all runtimes
+        uses: actions/download-artifact@v8
+        with:
+          pattern: runtimes-*
+          merge-multiple: true        # merges into a single folder
+          path: src/YG/runtimes/
+
+      - name: Pack NuGet
+        run: dotnet pack src/YG/Enyim.YG.csproj -c Release -p:Version=${{ inputs.version }}
+
+      - name: Push
+        run: dotnet nuget push **/*.nupkg --skip-duplicate --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" --api-key ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload NuGet package
+        uses: actions/upload-artifact@v6
+        with:
+          name: nuget
+          path: "**/*.nupkg"
+---
