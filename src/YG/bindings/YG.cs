@@ -229,6 +229,25 @@ public static unsafe partial class YG
     [return: NativeTypeName("bool")]
     public static extern byte NodeHasMeasureFunc([NativeTypeName("YGNodeConstRef")] YGNode* node);
 
+    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeSetMinContentMeasureFunc", ExactSpelling = true)]
+    public static extern void NodeSetMinContentMeasureFunc([NativeTypeName("YGNodeRef")] YGNode* node, [NativeTypeName("YGMinContentMeasureFunc")] delegate* unmanaged[Cdecl]<YGNode*, float, YGMeasureMode, float, YGMeasureMode, YGSize> minContentMeasureFunc);
+
+    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeHasMinContentMeasureFunc", ExactSpelling = true)]
+    [return: NativeTypeName("bool")]
+    public static extern byte NodeHasMinContentMeasureFunc([NativeTypeName("YGNodeConstRef")] YGNode* node);
+
+    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeSetMinContentWidth", ExactSpelling = true)]
+    public static extern void NodeSetMinContentWidth([NativeTypeName("YGNodeRef")] YGNode* node, float minContentWidth);
+
+    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeSetMinContentHeight", ExactSpelling = true)]
+    public static extern void NodeSetMinContentHeight([NativeTypeName("YGNodeRef")] YGNode* node, float minContentHeight);
+
+    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeGetMinContentWidth", ExactSpelling = true)]
+    public static extern float NodeGetMinContentWidth([NativeTypeName("YGNodeConstRef")] YGNode* node);
+
+    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeGetMinContentHeight", ExactSpelling = true)]
+    public static extern float NodeGetMinContentHeight([NativeTypeName("YGNodeConstRef")] YGNode* node);
+
     [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeSetBaselineFunc", ExactSpelling = true)]
     public static extern void NodeSetBaselineFunc([NativeTypeName("YGNodeRef")] YGNode* node, [NativeTypeName("YGBaselineFunc")] delegate* unmanaged[Cdecl]<YGNode*, float, float, float> baselineFunc);
 
