@@ -1,0 +1,48 @@
+name: Publish
+run-name: Publish build run ${{ inputs.run_id }}
+
+# pushes the package produced by a (successful) Build run, without rebuilding it
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: Build run ID (the number in the run URL, .../actions/runs/<run_id>)
+        required: true
+
+permissions:
+  actions: read       # download artifacts from another run
+  packages: write     # push to GitHub Packages
+  contents: read
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check build run
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          read -r name conclusion < <(gh run view "${{ inputs.run_id }}" --repo "${{ github.repository }}" \
+            --json workflowName,conclusion --jq '"\(.workflowName) \(.conclusion)"')
+          if [ "$name" != "Build" ] || [ "$conclusion" != "success" ]; then
+            echo "::error::Run ${{ inputs.run_id }} is '$name' with conclusion '$conclusion'; expected a successful Build run"
+            exit 1
+          fi
+
+      - name: Download NuGet package
+        uses: actions/download-artifact@v8
+        with:
+          name: nuget
+          path: feed/
+          run-id: ${{ inputs.run_id }}
+          github-token: ${{ github.token }}
+
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Push
+        run: |
+          find feed -name '*.nupkg' -exec basename {} \; | sed 's/^/Pushing /' | tee -a $GITHUB_STEP_SUMMARY
+          dotnet nuget push "feed/**/*.nupkg" --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" --api-key ${{ github.token }}

@@ -1,4 +1,5 @@
 name: Build
+run-name: Build ${{ inputs.version }} (${{ github.ref_name }})
 
 #[push]
 on: 
@@ -9,8 +10,8 @@ on:
         required: true
         default: 0.0.1
 
+# pushing is done separately by publish.yml
 permissions:
-  packages: write
   contents: read
 
 jobs:
@@ -22,7 +23,8 @@ jobs:
             arch: x64
           - os: macos-latest
             arch: arm64
-          - os: ubuntu-latest
+          # pinned: shipped binaries inherit the build machine's glibc/libstdc++ minimum version
+          - os: ubuntu-24.04
             arch: x64
           - os: ubuntu-24.04-arm
             arch: arm64
@@ -69,6 +71,11 @@ jobs:
         with:
           name: nuget
           path: "**/*.nupkg"
+
+      - name: Summary
+        run: |
+          echo "Packed **Enyim.YG ${{ inputs.version }}**." >> $GITHUB_STEP_SUMMARY
+          echo "Once all jobs pass, push it by running the **Publish** workflow with run ID \`${{ github.run_id }}\`." >> $GITHUB_STEP_SUMMARY
 
   # publish a small app with Native AOT on every platform, so static linking problems
   # (CRT mismatch, missing C++ runtime, non-PIC objects) fail here instead of in consumers' builds
@@ -120,18 +127,3 @@ jobs:
           if ($dynamic) { Write-Error "Dynamic yoga library found in publish output: $dynamic"; exit 1 }
           ./smoke/AotSmoke
           if ($LASTEXITCODE -ne 0) { Write-Error "AotSmoke failed ($LASTEXITCODE)"; exit 1 }
-
-  push:
-    needs: aot-smoke
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Download NuGet package
-        uses: actions/download-artifact@v8
-        with:
-          name: nuget
-          path: feed/
-
-      - name: Push
-        run: dotnet nuget push "feed/**/*.nupkg" --skip-duplicate --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" --api-key ${{ secrets.GITHUB_TOKEN }}
----
