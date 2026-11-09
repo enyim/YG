@@ -22,6 +22,14 @@
       <Pack>true</Pack>
       <PackagePath>runtimes/</PackagePath>
     </None>
+    <None Include="staticlibs/**">
+      <Pack>true</Pack>
+      <PackagePath>staticlibs/</PackagePath>
+    </None>
+    <None Include="build/Enyim.YG.targets">
+      <Pack>true</Pack>
+      <PackagePath>buildTransitive/</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

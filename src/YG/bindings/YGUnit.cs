@@ -6,7 +6,4 @@ public enum YGUnit
     YGUnitPoint,
     YGUnitPercent,
     YGUnitAuto,
-    YGUnitMaxContent,
-    YGUnitFitContent,
-    YGUnitStretch,
 }

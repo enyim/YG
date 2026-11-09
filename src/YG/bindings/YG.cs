@@ -90,10 +90,6 @@ public static unsafe partial class YG
     [return: NativeTypeName("const char *")]
     public static extern sbyte* FlexDirectionToString(YGFlexDirection param0);
 
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGGridTrackTypeToString", ExactSpelling = true)]
-    [return: NativeTypeName("const char *")]
-    public static extern sbyte* GridTrackTypeToString(YGGridTrackType param0);
-
     [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGGutterToString", ExactSpelling = true)]
     [return: NativeTypeName("const char *")]
     public static extern sbyte* GutterToString(YGGutter param0);
@@ -229,25 +225,6 @@ public static unsafe partial class YG
     [return: NativeTypeName("bool")]
     public static extern byte NodeHasMeasureFunc([NativeTypeName("YGNodeConstRef")] YGNode* node);
 
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeSetMinContentMeasureFunc", ExactSpelling = true)]
-    public static extern void NodeSetMinContentMeasureFunc([NativeTypeName("YGNodeRef")] YGNode* node, [NativeTypeName("YGMinContentMeasureFunc")] delegate* unmanaged[Cdecl]<YGNode*, float, YGMeasureMode, float, YGMeasureMode, YGSize> minContentMeasureFunc);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeHasMinContentMeasureFunc", ExactSpelling = true)]
-    [return: NativeTypeName("bool")]
-    public static extern byte NodeHasMinContentMeasureFunc([NativeTypeName("YGNodeConstRef")] YGNode* node);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeSetMinContentWidth", ExactSpelling = true)]
-    public static extern void NodeSetMinContentWidth([NativeTypeName("YGNodeRef")] YGNode* node, float minContentWidth);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeSetMinContentHeight", ExactSpelling = true)]
-    public static extern void NodeSetMinContentHeight([NativeTypeName("YGNodeRef")] YGNode* node, float minContentHeight);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeGetMinContentWidth", ExactSpelling = true)]
-    public static extern float NodeGetMinContentWidth([NativeTypeName("YGNodeConstRef")] YGNode* node);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeGetMinContentHeight", ExactSpelling = true)]
-    public static extern float NodeGetMinContentHeight([NativeTypeName("YGNodeConstRef")] YGNode* node);
-
     [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeSetBaselineFunc", ExactSpelling = true)]
     public static extern void NodeSetBaselineFunc([NativeTypeName("YGNodeRef")] YGNode* node, [NativeTypeName("YGBaselineFunc")] delegate* unmanaged[Cdecl]<YGNode*, float, float, float> baselineFunc);
 
@@ -314,12 +291,6 @@ public static unsafe partial class YG
     [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeLayoutGetPadding", ExactSpelling = true)]
     public static extern float NodeLayoutGetPadding([NativeTypeName("YGNodeConstRef")] YGNode* node, YGEdge edge);
 
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeLayoutGetRawHeight", ExactSpelling = true)]
-    public static extern float NodeLayoutGetRawHeight([NativeTypeName("YGNodeConstRef")] YGNode* node);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeLayoutGetRawWidth", ExactSpelling = true)]
-    public static extern float NodeLayoutGetRawWidth([NativeTypeName("YGNodeConstRef")] YGNode* node);
-
     [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeCopyStyle", ExactSpelling = true)]
     public static extern void NodeCopyStyle([NativeTypeName("YGNodeRef")] YGNode* dstNode, [NativeTypeName("YGNodeConstRef")] YGNode* srcNode);
 
@@ -340,18 +311,6 @@ public static unsafe partial class YG
 
     [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleGetJustifyContent", ExactSpelling = true)]
     public static extern YGJustify NodeStyleGetJustifyContent([NativeTypeName("YGNodeConstRef")] YGNode* node);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetJustifyItems", ExactSpelling = true)]
-    public static extern void NodeStyleSetJustifyItems([NativeTypeName("YGNodeRef")] YGNode* node, YGJustify justifyItems);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleGetJustifyItems", ExactSpelling = true)]
-    public static extern YGJustify NodeStyleGetJustifyItems([NativeTypeName("YGNodeConstRef")] YGNode* node);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetJustifySelf", ExactSpelling = true)]
-    public static extern void NodeStyleSetJustifySelf([NativeTypeName("YGNodeRef")] YGNode* node, YGJustify justifySelf);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleGetJustifySelf", ExactSpelling = true)]
-    public static extern YGJustify NodeStyleGetJustifySelf([NativeTypeName("YGNodeConstRef")] YGNode* node);
 
     [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetAlignContent", ExactSpelling = true)]
     public static extern void NodeStyleSetAlignContent([NativeTypeName("YGNodeRef")] YGNode* node, YGAlign alignContent);
@@ -422,15 +381,6 @@ public static unsafe partial class YG
     [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetFlexBasisAuto", ExactSpelling = true)]
     public static extern void NodeStyleSetFlexBasisAuto([NativeTypeName("YGNodeRef")] YGNode* node);
 
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetFlexBasisMaxContent", ExactSpelling = true)]
-    public static extern void NodeStyleSetFlexBasisMaxContent([NativeTypeName("YGNodeRef")] YGNode* node);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetFlexBasisFitContent", ExactSpelling = true)]
-    public static extern void NodeStyleSetFlexBasisFitContent([NativeTypeName("YGNodeRef")] YGNode* node);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetFlexBasisStretch", ExactSpelling = true)]
-    public static extern void NodeStyleSetFlexBasisStretch([NativeTypeName("YGNodeRef")] YGNode* node);
-
     [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleGetFlexBasis", ExactSpelling = true)]
     public static extern YGValue NodeStyleGetFlexBasis([NativeTypeName("YGNodeConstRef")] YGNode* node);
 
@@ -480,7 +430,7 @@ public static unsafe partial class YG
     public static extern void NodeStyleSetGapPercent([NativeTypeName("YGNodeRef")] YGNode* node, YGGutter gutter, float gapLength);
 
     [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleGetGap", ExactSpelling = true)]
-    public static extern YGValue NodeStyleGetGap([NativeTypeName("YGNodeConstRef")] YGNode* node, YGGutter gutter);
+    public static extern float NodeStyleGetGap([NativeTypeName("YGNodeConstRef")] YGNode* node, YGGutter gutter);
 
     [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetBoxSizing", ExactSpelling = true)]
     public static extern void NodeStyleSetBoxSizing([NativeTypeName("YGNodeRef")] YGNode* node, YGBoxSizing boxSizing);
@@ -497,15 +447,6 @@ public static unsafe partial class YG
     [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetWidthAuto", ExactSpelling = true)]
     public static extern void NodeStyleSetWidthAuto([NativeTypeName("YGNodeRef")] YGNode* node);
 
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetWidthMaxContent", ExactSpelling = true)]
-    public static extern void NodeStyleSetWidthMaxContent([NativeTypeName("YGNodeRef")] YGNode* node);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetWidthFitContent", ExactSpelling = true)]
-    public static extern void NodeStyleSetWidthFitContent([NativeTypeName("YGNodeRef")] YGNode* node);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetWidthStretch", ExactSpelling = true)]
-    public static extern void NodeStyleSetWidthStretch([NativeTypeName("YGNodeRef")] YGNode* node);
-
     [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleGetWidth", ExactSpelling = true)]
     public static extern YGValue NodeStyleGetWidth([NativeTypeName("YGNodeConstRef")] YGNode* node);
 
@@ -518,15 +459,6 @@ public static unsafe partial class YG
     [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetHeightAuto", ExactSpelling = true)]
     public static extern void NodeStyleSetHeightAuto([NativeTypeName("YGNodeRef")] YGNode* node);
 
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetHeightMaxContent", ExactSpelling = true)]
-    public static extern void NodeStyleSetHeightMaxContent([NativeTypeName("YGNodeRef")] YGNode* node);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetHeightFitContent", ExactSpelling = true)]
-    public static extern void NodeStyleSetHeightFitContent([NativeTypeName("YGNodeRef")] YGNode* node);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetHeightStretch", ExactSpelling = true)]
-    public static extern void NodeStyleSetHeightStretch([NativeTypeName("YGNodeRef")] YGNode* node);
-
     [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleGetHeight", ExactSpelling = true)]
     public static extern YGValue NodeStyleGetHeight([NativeTypeName("YGNodeConstRef")] YGNode* node);
 
@@ -535,15 +467,6 @@ public static unsafe partial class YG
 
     [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetMinWidthPercent", ExactSpelling = true)]
     public static extern void NodeStyleSetMinWidthPercent([NativeTypeName("YGNodeRef")] YGNode* node, float minWidth);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetMinWidthMaxContent", ExactSpelling = true)]
-    public static extern void NodeStyleSetMinWidthMaxContent([NativeTypeName("YGNodeRef")] YGNode* node);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetMinWidthFitContent", ExactSpelling = true)]
-    public static extern void NodeStyleSetMinWidthFitContent([NativeTypeName("YGNodeRef")] YGNode* node);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetMinWidthStretch", ExactSpelling = true)]
-    public static extern void NodeStyleSetMinWidthStretch([NativeTypeName("YGNodeRef")] YGNode* node);
 
     [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleGetMinWidth", ExactSpelling = true)]
     public static extern YGValue NodeStyleGetMinWidth([NativeTypeName("YGNodeConstRef")] YGNode* node);
@@ -554,15 +477,6 @@ public static unsafe partial class YG
     [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetMinHeightPercent", ExactSpelling = true)]
     public static extern void NodeStyleSetMinHeightPercent([NativeTypeName("YGNodeRef")] YGNode* node, float minHeight);
 
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetMinHeightMaxContent", ExactSpelling = true)]
-    public static extern void NodeStyleSetMinHeightMaxContent([NativeTypeName("YGNodeRef")] YGNode* node);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetMinHeightFitContent", ExactSpelling = true)]
-    public static extern void NodeStyleSetMinHeightFitContent([NativeTypeName("YGNodeRef")] YGNode* node);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetMinHeightStretch", ExactSpelling = true)]
-    public static extern void NodeStyleSetMinHeightStretch([NativeTypeName("YGNodeRef")] YGNode* node);
-
     [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleGetMinHeight", ExactSpelling = true)]
     public static extern YGValue NodeStyleGetMinHeight([NativeTypeName("YGNodeConstRef")] YGNode* node);
 
@@ -571,15 +485,6 @@ public static unsafe partial class YG
 
     [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetMaxWidthPercent", ExactSpelling = true)]
     public static extern void NodeStyleSetMaxWidthPercent([NativeTypeName("YGNodeRef")] YGNode* node, float maxWidth);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetMaxWidthMaxContent", ExactSpelling = true)]
-    public static extern void NodeStyleSetMaxWidthMaxContent([NativeTypeName("YGNodeRef")] YGNode* node);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetMaxWidthFitContent", ExactSpelling = true)]
-    public static extern void NodeStyleSetMaxWidthFitContent([NativeTypeName("YGNodeRef")] YGNode* node);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetMaxWidthStretch", ExactSpelling = true)]
-    public static extern void NodeStyleSetMaxWidthStretch([NativeTypeName("YGNodeRef")] YGNode* node);
 
     [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleGetMaxWidth", ExactSpelling = true)]
     public static extern YGValue NodeStyleGetMaxWidth([NativeTypeName("YGNodeConstRef")] YGNode* node);
@@ -590,15 +495,6 @@ public static unsafe partial class YG
     [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetMaxHeightPercent", ExactSpelling = true)]
     public static extern void NodeStyleSetMaxHeightPercent([NativeTypeName("YGNodeRef")] YGNode* node, float maxHeight);
 
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetMaxHeightMaxContent", ExactSpelling = true)]
-    public static extern void NodeStyleSetMaxHeightMaxContent([NativeTypeName("YGNodeRef")] YGNode* node);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetMaxHeightFitContent", ExactSpelling = true)]
-    public static extern void NodeStyleSetMaxHeightFitContent([NativeTypeName("YGNodeRef")] YGNode* node);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetMaxHeightStretch", ExactSpelling = true)]
-    public static extern void NodeStyleSetMaxHeightStretch([NativeTypeName("YGNodeRef")] YGNode* node);
-
     [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleGetMaxHeight", ExactSpelling = true)]
     public static extern YGValue NodeStyleGetMaxHeight([NativeTypeName("YGNodeConstRef")] YGNode* node);
 
@@ -607,90 +503,6 @@ public static unsafe partial class YG
 
     [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleGetAspectRatio", ExactSpelling = true)]
     public static extern float NodeStyleGetAspectRatio([NativeTypeName("YGNodeConstRef")] YGNode* node);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetGridColumnStart", ExactSpelling = true)]
-    public static extern void NodeStyleSetGridColumnStart([NativeTypeName("YGNodeRef")] YGNode* node, int gridColumnStart);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetGridColumnStartAuto", ExactSpelling = true)]
-    public static extern void NodeStyleSetGridColumnStartAuto([NativeTypeName("YGNodeRef")] YGNode* node);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetGridColumnStartSpan", ExactSpelling = true)]
-    public static extern void NodeStyleSetGridColumnStartSpan([NativeTypeName("YGNodeRef")] YGNode* node, int span);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleGetGridColumnStart", ExactSpelling = true)]
-    public static extern int NodeStyleGetGridColumnStart([NativeTypeName("YGNodeConstRef")] YGNode* node);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetGridColumnEnd", ExactSpelling = true)]
-    public static extern void NodeStyleSetGridColumnEnd([NativeTypeName("YGNodeRef")] YGNode* node, int gridColumnEnd);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetGridColumnEndAuto", ExactSpelling = true)]
-    public static extern void NodeStyleSetGridColumnEndAuto([NativeTypeName("YGNodeRef")] YGNode* node);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetGridColumnEndSpan", ExactSpelling = true)]
-    public static extern void NodeStyleSetGridColumnEndSpan([NativeTypeName("YGNodeRef")] YGNode* node, int span);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleGetGridColumnEnd", ExactSpelling = true)]
-    public static extern int NodeStyleGetGridColumnEnd([NativeTypeName("YGNodeConstRef")] YGNode* node);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetGridRowStart", ExactSpelling = true)]
-    public static extern void NodeStyleSetGridRowStart([NativeTypeName("YGNodeRef")] YGNode* node, int gridRowStart);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetGridRowStartAuto", ExactSpelling = true)]
-    public static extern void NodeStyleSetGridRowStartAuto([NativeTypeName("YGNodeRef")] YGNode* node);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetGridRowStartSpan", ExactSpelling = true)]
-    public static extern void NodeStyleSetGridRowStartSpan([NativeTypeName("YGNodeRef")] YGNode* node, int span);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleGetGridRowStart", ExactSpelling = true)]
-    public static extern int NodeStyleGetGridRowStart([NativeTypeName("YGNodeConstRef")] YGNode* node);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetGridRowEnd", ExactSpelling = true)]
-    public static extern void NodeStyleSetGridRowEnd([NativeTypeName("YGNodeRef")] YGNode* node, int gridRowEnd);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetGridRowEndAuto", ExactSpelling = true)]
-    public static extern void NodeStyleSetGridRowEndAuto([NativeTypeName("YGNodeRef")] YGNode* node);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetGridRowEndSpan", ExactSpelling = true)]
-    public static extern void NodeStyleSetGridRowEndSpan([NativeTypeName("YGNodeRef")] YGNode* node, int span);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleGetGridRowEnd", ExactSpelling = true)]
-    public static extern int NodeStyleGetGridRowEnd([NativeTypeName("YGNodeConstRef")] YGNode* node);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetGridTemplateColumnsCount", ExactSpelling = true)]
-    public static extern void NodeStyleSetGridTemplateColumnsCount([NativeTypeName("YGNodeRef")] YGNode* node, [NativeTypeName("size_t")] nuint count);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetGridTemplateColumn", ExactSpelling = true)]
-    public static extern void NodeStyleSetGridTemplateColumn([NativeTypeName("YGNodeRef")] YGNode* node, [NativeTypeName("size_t")] nuint index, YGGridTrackType type, float value);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetGridTemplateColumnMinMax", ExactSpelling = true)]
-    public static extern void NodeStyleSetGridTemplateColumnMinMax([NativeTypeName("YGNodeRef")] YGNode* node, [NativeTypeName("size_t")] nuint index, YGGridTrackType minType, float minValue, YGGridTrackType maxType, float maxValue);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetGridTemplateRowsCount", ExactSpelling = true)]
-    public static extern void NodeStyleSetGridTemplateRowsCount([NativeTypeName("YGNodeRef")] YGNode* node, [NativeTypeName("size_t")] nuint count);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetGridTemplateRow", ExactSpelling = true)]
-    public static extern void NodeStyleSetGridTemplateRow([NativeTypeName("YGNodeRef")] YGNode* node, [NativeTypeName("size_t")] nuint index, YGGridTrackType type, float value);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetGridTemplateRowMinMax", ExactSpelling = true)]
-    public static extern void NodeStyleSetGridTemplateRowMinMax([NativeTypeName("YGNodeRef")] YGNode* node, [NativeTypeName("size_t")] nuint index, YGGridTrackType minType, float minValue, YGGridTrackType maxType, float maxValue);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetGridAutoColumnsCount", ExactSpelling = true)]
-    public static extern void NodeStyleSetGridAutoColumnsCount([NativeTypeName("YGNodeRef")] YGNode* node, [NativeTypeName("size_t")] nuint count);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetGridAutoColumn", ExactSpelling = true)]
-    public static extern void NodeStyleSetGridAutoColumn([NativeTypeName("YGNodeRef")] YGNode* node, [NativeTypeName("size_t")] nuint index, YGGridTrackType type, float value);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetGridAutoColumnMinMax", ExactSpelling = true)]
-    public static extern void NodeStyleSetGridAutoColumnMinMax([NativeTypeName("YGNodeRef")] YGNode* node, [NativeTypeName("size_t")] nuint index, YGGridTrackType minType, float minValue, YGGridTrackType maxType, float maxValue);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetGridAutoRowsCount", ExactSpelling = true)]
-    public static extern void NodeStyleSetGridAutoRowsCount([NativeTypeName("YGNodeRef")] YGNode* node, [NativeTypeName("size_t")] nuint count);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetGridAutoRow", ExactSpelling = true)]
-    public static extern void NodeStyleSetGridAutoRow([NativeTypeName("YGNodeRef")] YGNode* node, [NativeTypeName("size_t")] nuint index, YGGridTrackType type, float value);
-
-    [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGNodeStyleSetGridAutoRowMinMax", ExactSpelling = true)]
-    public static extern void NodeStyleSetGridAutoRowMinMax([NativeTypeName("YGNodeRef")] YGNode* node, [NativeTypeName("size_t")] nuint index, YGGridTrackType minType, float minValue, YGGridTrackType maxType, float maxValue);
 
     [DllImport("yoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "YGRoundValueToPixelGrid", ExactSpelling = true)]
     public static extern float RoundValueToPixelGrid(double value, double pointScaleFactor, [NativeTypeName("bool")] byte forceCeil, [NativeTypeName("bool")] byte forceFloor);
@@ -713,9 +525,6 @@ public static unsafe partial class YG
         {
             case YGUnit.YGUnitUndefined:
             case YGUnit.YGUnitAuto:
-            case YGUnit.YGUnitFitContent:
-            case YGUnit.YGUnitMaxContent:
-            case YGUnit.YGUnitStretch:
             {
                 return true;
             }
@@ -725,12 +534,14 @@ public static unsafe partial class YG
             {
                 return lhs->value == rhs->value;
             }
-
-            default:
-            {
-                return false;
-            }
         }
+
+        return false;
+    }
+
+    public static bool NotEquals([NativeTypeName("const YGValue &")] YGValue* lhs, [NativeTypeName("const YGValue &")] YGValue* rhs)
+    {
+        return !(Equals(lhs, rhs));
     }
 
     public static YGValue Subtract([NativeTypeName("const YGValue &")] YGValue* value)

@@ -15,3 +15,6 @@ global.json
 .env
 
 native/build/
+
+src/YG/runtimes/
+src/YG/staticlibs/

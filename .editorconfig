@@ -1,7 +1,7 @@
 root = true
 
 [*]
-end_of_line = crlf
+end_of_line = lf
 indent_style = tab
 
 [*.{*proj,targets,props}]
@@ -17,7 +17,7 @@ indent_size = 4
 [*.{cs,vb}]
 tab_width = 4
 indent_size = 4
-end_of_line = crlf
+end_of_line = lf
 
 #### Naming styles ####
 

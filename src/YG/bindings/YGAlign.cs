@@ -11,6 +11,4 @@ public enum YGAlign
     YGAlignSpaceBetween,
     YGAlignSpaceAround,
     YGAlignSpaceEvenly,
-    YGAlignStart,
-    YGAlignEnd,
 }

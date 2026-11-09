@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    CI smoke test: publishes with Native AOT against the freshly packed Enyim.YG package
+    and checks that yoga is linked statically.
+    dotnet publish -c Release -r <rid> -p:PublishAot=true -p:EnyimYGVersion=<version> -p:RestoreAdditionalProjectSources=<feed>
+  -->
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <IsPackable>false</IsPackable>
+    <EnyimYGVersion Condition="'$(EnyimYGVersion)' == ''">0.0.1</EnyimYGVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Enyim.YG" Version="$(EnyimYGVersion)" />
+  </ItemGroup>
+
+</Project>

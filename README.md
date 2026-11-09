@@ -46,6 +46,15 @@ cd src
 .\codegen.ps1
 ```
 
+# Native AOT
+
+The package contains static Yoga libraries for every supported RID as well as the usual dynamic ones. When an app that references `Enyim.YG` is published with `PublishAot=true`, Yoga is linked straight into the executable (`DirectPInvoke`), and the `yoga.dll`/`libyoga.*` file is left out of the publish output.
+
+- To keep using the dynamic library, set `<EnyimYGStaticLink>false</EnyimYGStaticLink>`.
+- If there is no static library for the target RID, the dynamic library is used automatically.
+- Windows: the static library is built with VS 2026 (MSVC v145), so AOT publishing needs the VS 2026 build tools.
+- Linux: the executable links against `libstdc++.so.6`.
+
 # License
 
 This project is licensed under the [MIT License](LICENSE).  

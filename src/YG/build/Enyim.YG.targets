@@ -1,0 +1,35 @@
+<Project>
+
+  <!--
+    Native AOT: link yoga statically into the executable instead of shipping the dynamic library.
+    Opt out with <EnyimYGStaticLink>false</EnyimYGStaticLink>.
+    Falls back to the dynamic library (runtimes/<rid>/native) when no static lib exists for the RID.
+  -->
+
+  <PropertyGroup>
+    <EnyimYGStaticLink Condition="'$(EnyimYGStaticLink)' == ''">true</EnyimYGStaticLink>
+    <_EnyimYGStaticDir>$([MSBuild]::NormalizeDirectory('$(MSBuildThisFileDirectory)', '..', 'staticlibs', '$(RuntimeIdentifier)'))</_EnyimYGStaticDir>
+    <_EnyimYGStaticLib Condition="$(RuntimeIdentifier.StartsWith('win'))">$(_EnyimYGStaticDir)yoga_static.lib</_EnyimYGStaticLib>
+    <_EnyimYGStaticLib Condition="!$(RuntimeIdentifier.StartsWith('win'))">$(_EnyimYGStaticDir)libyoga_static.a</_EnyimYGStaticLib>
+    <_EnyimYGUseStatic Condition="'$(PublishAot)' == 'true' And '$(EnyimYGStaticLink)' == 'true' And '$(RuntimeIdentifier)' != '' And Exists('$(_EnyimYGStaticLib)')">true</_EnyimYGUseStatic>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(_EnyimYGUseStatic)' == 'true'">
+    <!-- must match the library name in [DllImport("yoga")] -->
+    <DirectPInvoke Include="yoga" />
+    <NativeLibrary Include="$(_EnyimYGStaticLib)" />
+    <LinkerArg Include="-lc++" Condition="$(RuntimeIdentifier.StartsWith('osx'))" />
+    <LinkerArg Include="-lstdc++" Condition="$(RuntimeIdentifier.StartsWith('linux'))" />
+  </ItemGroup>
+
+  <!-- the dynamic library is not needed next to the AOT binary -->
+  <Target Name="_EnyimYGRemoveDynamicLib"
+          AfterTargets="ComputeResolvedFilesToPublishList"
+          Condition="'$(_EnyimYGUseStatic)' == 'true'">
+    <ItemGroup>
+      <ResolvedFileToPublish Remove="@(ResolvedFileToPublish)"
+        Condition="'%(ResolvedFileToPublish.NuGetPackageId)' == 'Enyim.YG' And ('%(ResolvedFileToPublish.Filename)' == 'yoga' Or '%(ResolvedFileToPublish.Filename)' == 'libyoga')" />
+    </ItemGroup>
+  </Target>
+
+</Project>

@@ -5,5 +5,4 @@ public enum YGDisplay
     YGDisplayFlex,
     YGDisplayNone,
     YGDisplayContents,
-    YGDisplayGrid,
 }
